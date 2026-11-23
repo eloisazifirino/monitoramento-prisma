@@ -1,0 +1,34 @@
+<section class="page-title">
+  <div><h1>Ocorrências</h1><p>Analise os desvios e registre o atendimento.</p></div>
+  <select aria-label="Filtrar por situação" (change)="filtro.set($any($event.target).value); selecionar('')"><option>Todas</option><option>Aberta</option><option>Em atendimento</option><option>Encerrada</option></select>
+</section>
+<div class="incident-grid">
+  <section class="card queue" aria-label="Lista de ocorrências">
+    @for (item of lista(); track item.id) {
+      <button class="queue-item" [class.selected]="selecionada()?.id === item.id" [attr.aria-pressed]="selecionada()?.id === item.id" (click)="selecionar(item.id)">
+        <span class="pill" [class.high]="item.prioridade === 'Alta'">{{ item.prioridade }}</span>
+        <strong>{{ item.titulo }}</strong><small>{{ item.bomba }} · {{ item.situacao }}</small>
+      </button>
+    } @empty { <p>Nenhuma ocorrência nesta situação.</p> }
+  </section>
+  @if (selecionada(); as item) {
+    <section class="card incident">
+      <div class="section-head"><span class="code">{{ item.id }} · {{ item.bomba }}</span><span class="pill">{{ item.situacao }}</span></div>
+      <h2>{{ item.titulo }}</h2>
+      <h3>Justificativa da prioridade {{ item.prioridade.toLowerCase() }}</h3><p>{{ item.justificativa }}</p>
+      <div class="suggestion"><h3>Verificação sugerida</h3><p>{{ item.verificacao }}</p></div>
+      @if (item.registros.length) {
+        <h3>Histórico de atendimento</h3>
+        <ul class="history">@for (registro of item.registros; track $index) { <li><time>{{ registro.data | date:'dd/MM/yyyy HH:mm' }}</time>{{ registro.descricao }}</li> }</ul>
+      }
+      @if (item.situacao !== 'Encerrada') {
+        <form (submit)="$event.preventDefault(); registrar(item, situacao.value)">
+          <label for="descricao">Registro do atendimento</label>
+          <textarea id="descricao" required rows="3" placeholder="Descreva a verificação ou ação realizada" [value]="descricao()" (input)="descricao.set($any($event.target).value)"></textarea>
+          <div class="form-actions"><select #situacao aria-label="Situação após o atendimento"><option value="Em atendimento">Em atendimento</option>@if (item.situacao === 'Em atendimento') { <option value="Encerrada">Encerrada</option> }</select><button class="button primary" [disabled]="!descricao().trim()">Salvar registro</button></div>
+        </form>
+      }
+    </section>
+  }
+  <p class="feedback" role="status">{{ mensagem() }}</p>
+</div>

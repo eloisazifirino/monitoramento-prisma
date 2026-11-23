@@ -1,0 +1,42 @@
+<section class="page-title">
+  <div><h1>Visão geral</h1><p>Acompanhe a operação das bombas e os desvios de telemetria.</p></div>
+  <a class="button primary" routerLink="/ocorrencias">Ver ocorrências</a>
+</section>
+<div class="stats">
+  <article class="card stat"><span class="stat-icon">▦</span><span>Bombas monitoradas</span><strong>{{ bombas.length }}</strong></article>
+  <article class="card stat"><span class="stat-icon green">●</span><span>Bombas em atividade</span><strong>3</strong></article>
+  <article class="card stat"><span class="stat-icon pink">◇</span><span>Ocorrências ativas</span><strong>{{ abertas().length }}</strong></article>
+</div>
+<div class="overview">
+  <section class="chart card">
+    <div class="section-head">
+      <div><h2>Tendência de vazão</h2><p>B-101 · Bomba de transferência 01</p></div>
+      <select aria-label="Período da tendência de vazão" [value]="faixa()" (change)="faixa.set($any($event.target).value)"><option value="6">Últimas 6 h</option><option value="12">Últimas 12 h</option></select>
+    </div>
+    <p class="reading">86,2 <small>m³/h</small></p>
+    <div class="graph-wrap">
+      <div class="scale" aria-hidden="true"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="graph" role="img" [attr.aria-label]="'Vazão simulada em m³/h, últimas ' + faixa() + ' horas: ' + curvas().join(', ')">
+        @for (valor of curvas(); track $index) { <span [style.height.%]="valor" [title]="valor + ' m³/h'"></span> }
+      </div>
+    </div>
+    <div class="times" aria-hidden="true">@for (hora of horas(); track hora) { <span>{{ hora }}</span> }</div>
+  </section>
+  <section class="card queue">
+    <div class="section-head"><h2>Ocorrências ativas</h2><span class="count">{{ abertas().length }}</span></div>
+    @for (item of abertas(); track item.id) {
+      <a class="queue-item" routerLink="/ocorrencias" [queryParams]="{ id: item.id }">
+        <span class="pill" [class.high]="item.prioridade === 'Alta'">{{ item.prioridade }}</span>
+        <strong>{{ item.titulo }}</strong><small>{{ item.bomba }} · {{ item.hora }}</small>
+      </a>
+    } @empty { <p>Nenhuma ocorrência ativa.</p> }
+  </section>
+</div>
+<section class="card fleet">
+  <div class="section-head"><h2>Estado das bombas</h2><a routerLink="/bombas">Ver bombas</a></div>
+  <div class="fleet-grid">
+    @for (bomba of bombas; track bomba.codigo) {
+      <a routerLink="/bombas" [queryParams]="{ bomba: bomba.codigo }"><strong>{{ bomba.codigo }}</strong><span class="pill" [class.on]="bomba.estado === 'Em operação'" [class.attention]="bomba.estado === 'Em atenção'">{{ bomba.estado }}</span><small>{{ bomba.trecho }}</small></a>
+    }
+  </div>
+</section>

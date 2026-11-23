@@ -1,4 +1,15 @@
-<main>
-  <h1>Monitoramento Prisma</h1>
-  <router-outlet />
-</main>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" routerLink="/"><span class="prism">◈</span><span>Prisma<small>Monitoramento</small></span></a>
+    <nav aria-label="Navegação principal">
+      <a routerLink="/" routerLinkActive="ativo" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page"><span aria-hidden="true">▦</span> Visão geral</a>
+      <a routerLink="/bombas" routerLinkActive="ativo" ariaCurrentWhenActive="page"><span aria-hidden="true">◉</span> Bombas</a>
+      <a routerLink="/ocorrencias" routerLinkActive="ativo" ariaCurrentWhenActive="page"><span aria-hidden="true">◇</span> Ocorrências</a>
+    </nav>
+    <div class="sidebar-footer">INTEGRA SENAI Petrobras</div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span>Unidade de Transferência</span><span class="simulation">Dados simulados</span></header>
+    <main><router-outlet /></main>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<section class="page-title">
+  <div><h1>Bombas</h1><p>Estado operacional e últimas leituras dos equipamentos.</p></div>
+  <select aria-label="Filtrar bombas por estado" (change)="filtro.set($any($event.target).value)"><option>Todas</option><option>Em operação</option><option>Em atenção</option><option>Desligada</option></select>
+</section>
+<div class="pump-grid">
+  @for (bomba of lista(); track bomba.codigo) {
+    <article class="card pump" [class.selected]="bomba.codigo === selecionada">
+      <div class="section-head"><strong class="code">{{ bomba.codigo }}</strong><span class="pill" [class.on]="bomba.estado === 'Em operação'" [class.attention]="bomba.estado === 'Em atenção'">{{ bomba.estado }}</span></div>
+      <h2>{{ bomba.nome }}</h2><p>{{ bomba.trecho }}</p>
+      <dl class="metrics">
+        <div><dt>Vazão</dt><dd>{{ bomba.vazao | number:'1.1-1' }} m³/h</dd></div>
+        <div><dt>Pressão de entrada</dt><dd>{{ bomba.entrada | number:'1.1-1' }} bar</dd></div>
+        <div><dt>Pressão de saída</dt><dd>{{ bomba.saida | number:'1.1-1' }} bar</dd></div>
+        <div><dt>Temperatura</dt><dd>{{ bomba.temperatura }} °C</dd></div>
+        <div><dt>Vibração RMS</dt><dd>{{ bomba.vibracao | number:'1.1-1' }} mm/s</dd></div>
+      </dl>
+    </article>
+  }
+</div>
