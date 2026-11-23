@@ -3,7 +3,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { bombas } from '../../core/monitoramento';
 
-@Component({ imports: [DecimalPipe], templateUrl: './bombas.html' })
+@Component({ imports: [DecimalPipe], templateUrl: './bombas.html', styleUrl: './bombas.css' })
 export class Bombas {
   readonly filtro = signal('Todas');
   readonly selecionada = inject(ActivatedRoute).snapshot.queryParamMap.get('bomba');

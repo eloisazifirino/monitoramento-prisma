@@ -1,0 +1,8 @@
+.metrics div { background: #f6f0fc; border-radius: 12px; padding: 11px; }
+.pump h2 { margin-top: 12px; }
+.pump-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0; }
+.metrics dd { margin: 0; font-weight: 700; }
+.pump.selected { border-color: #a887de; }
+.pump-grid { display: grid; gap: 18px; }
+@media (max-width: 640px) { .pump-grid { grid-template-columns: 1fr; } }

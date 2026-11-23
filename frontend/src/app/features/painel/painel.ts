@@ -5,6 +5,7 @@ import { bombas, Monitoramento } from '../../core/monitoramento';
 @Component({
   imports: [RouterLink],
   templateUrl: './painel.html',
+  styleUrl: './painel.css',
 })
 export class Painel {
   readonly bombas = bombas;

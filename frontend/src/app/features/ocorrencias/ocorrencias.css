@@ -1,0 +1,19 @@
+.suggestion { background: #f6f0fc; border-radius: 12px; padding: 11px; }
+.incident h2 { margin-top: 12px; }
+.queue-item.selected { background: #f1e8ff; }
+.incident-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); align-items: start; }
+.incident h3 { margin-top: 14px; }
+.suggestion { margin-top: 14px; }
+.suggestion h3 { margin-top: 0; }
+form { margin-top: 18px; display: grid; gap: 8px; }
+form label, time { font-weight: 650; }
+textarea { width: 100%; resize: vertical; }
+.form-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.history { padding-left: 20px; }
+.history time { display: block; font-size: .875rem; color: var(--muted); }
+.history li { margin-bottom: 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.feedback:empty { display: none; }
+.queue-item.selected { border-color: #a887de; }
+textarea { font: inherit; color: #35254c; background: #fff; border: 1px solid #d8c9e7; border-radius: 10px; padding: 8px 11px; max-width: 100%; }
+.incident-grid { display: grid; gap: 18px; }
+@media (max-width: 640px) { .incident-grid { grid-template-columns: 1fr; } }

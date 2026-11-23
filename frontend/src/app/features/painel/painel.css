@@ -1,0 +1,24 @@
+.stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stat { display: grid; gap: 4px; color: var(--muted); font-weight: 600; }
+.stat strong { font-size: 2rem; color: #241b39; line-height: 1.2; }
+.stat-icon { display: grid; place-items: center; width: 37px; height: 37px; background: #ede4ff; color: #623aa9; border-radius: 11px; margin-bottom: 5px; }
+.overview { margin: 18px 0; grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr); }
+.chart { background: linear-gradient(133deg, #34215e, #513087 78%, #633b99); color: #fff; border-color: transparent; }
+.chart p, .chart small { color: #e8dcfc; }
+.chart .section-head { align-items: flex-start; flex-wrap: wrap; }
+.chart select { background-color: #fff; }
+.reading { margin: 14px 0 8px; font-size: 2rem; font-weight: 750; }
+.graph-wrap { display: flex; gap: 9px; }
+.scale { height: 144px; display: flex; flex-direction: column; justify-content: space-between; font-size: .75rem; color: #e8dcfc; text-align: right; }
+.graph { height: 144px; flex: 1; display: flex; align-items: flex-end; gap: clamp(3px, 1vw, 12px); background: repeating-linear-gradient(to top, #ffffff25 0 1px, transparent 1px 25%); border-top: 1px solid #ffffff25; }
+.graph span { flex: 1; border-radius: 5px 5px 0 0; background: linear-gradient(#e2b8ff,#9a6edf80); }
+.graph span:last-child { background: linear-gradient(#fdd3eb,#bf75c7); }
+.times { display: flex; justify-content: space-between; margin: 6px 0 0 30px; color: #e8dcfc; font-size: .8rem; }
+.fleet-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.fleet-grid a { display: grid; justify-items: start; gap: 5px; border: 1px solid var(--line); border-radius: 13px; padding: 12px; text-decoration: none; color: inherit; }
+.fleet-grid a:hover { border-color: #a887de; }
+.stat-icon.green { background: #def5ed; color: #145d49; }
+.stat-icon.pink { background: #fce2ed; color: #9b2859; }
+.stats, .overview { display: grid; gap: 18px; }
+@media (max-width: 980px) { .fleet-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .overview { grid-template-columns: 1fr; } .stats { gap: 8px; } .stat { padding: 10px; font-size: .875rem; overflow-wrap: anywhere; } }

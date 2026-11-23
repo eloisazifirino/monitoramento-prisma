@@ -3,7 +3,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Monitoramento, Ocorrencia } from '../../core/monitoramento';
 
-@Component({ imports: [DatePipe], templateUrl: './ocorrencias.html' })
+@Component({ imports: [DatePipe], templateUrl: './ocorrencias.html', styleUrl: './ocorrencias.css' })
 export class Ocorrencias {
   private readonly monitoramento = inject(Monitoramento);
   readonly filtro = signal('Todas');
