@@ -6,17 +6,25 @@ O MVP acompanha bombas de transferência entre tanques em uma unidade fictícia 
 
 ```mermaid
 erDiagram
+    FABRICANTE ||--o{ MODELO_EQUIPAMENTO : fabrica
+    MODELO_EQUIPAMENTO ||--o{ EQUIPAMENTO : identifica
     UNIDADE_OPERACIONAL ||--o{ EQUIPAMENTO : abriga
+
     EQUIPAMENTO ||--o{ SENSOR : possui
+    EQUIPAMENTO ||--o{ ESTADO_OPERACIONAL : apresenta
     SENSOR ||--o{ LEITURA : registra
-    EQUIPAMENTO ||--o{ ESTADO_OPERACIONAL : muda
-    EQUIPAMENTO ||--o{ MANUTENCAO_PROGRAMADA : agenda
-    EQUIPAMENTO ||--o{ REGRA_ANALISE : aplica
-    SENSOR o|--o{ REGRA_ANALISE : monitora
+
+    SENSOR ||--o{ REGRA_ANALISE : possui
     REGRA_ANALISE ||--o{ OCORRENCIA : gera
-    OCORRENCIA ||--o{ OCORRENCIA_LEITURA : apresenta
+    OCORRENCIA ||--o{ OCORRENCIA_LEITURA : possui
     LEITURA ||--o{ OCORRENCIA_LEITURA : fundamenta
-    OCORRENCIA ||--o{ ATENDIMENTO : recebe
+
+    EQUIPAMENTO ||--o{ MANUTENCAO_PROGRAMADA : recebe
+    USUARIO ||--o{ MANUTENCAO_PROGRAMADA : responde_por
+    OCORRENCIA o|--o{ MANUTENCAO_PROGRAMADA : motiva
+
+    OCORRENCIA o|--o{ ATENDIMENTO : recebe
+    MANUTENCAO_PROGRAMADA o|--o{ ATENDIMENTO : recebe
     USUARIO ||--o{ ATENDIMENTO : registra
 ```
 
